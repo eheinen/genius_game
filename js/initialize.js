@@ -2,20 +2,23 @@ canvas = null;
 ctx = null;
 gameWidth = null;
 gameHeight = null;
-score = 0;
-velocity = 0;
+velocity = 300;
 gameOver = false;
-stage = 3;
+stage = 1;
 sequence = new Array();
+startToPlay = false;
+indexHit = 0;
 
 function reset() {
   gameWidth = null;
   gameHeight = null;
-  score = 0;
+
   stage = 1;
-  velocity = 0;
+  velocity = 300;
   gameOver = false;
   sequence = new Array();
+  startToPlay = false;
+  indexHit = 0;
 }
 
 function initialize() {
@@ -32,7 +35,7 @@ function buildGameOver() {
 
         ctx.fillStyle = "#FFF";
         ctx.font = "30px sans-serif";
-        ctx.fillText("SCORE: " + score, (canvas.width / 2) - 350, (canvas.height / 2) - 125);
+        ctx.fillText("STAGE: " + stage, (canvas.width / 2) - 350, (canvas.height / 2) - 125);
 
         ctx.fillStyle = "#FFF";
         ctx.font = "30px sans-serif";
@@ -58,7 +61,10 @@ function buildScenario() {
     canvas.width = gameWidth;
     canvas.height = gameHeight;
 
-    buildTemplate(0);
+    ctx.fillStyle = "#333";
+    ctx.fillRect(0, 51, gameWidth, gameHeight - 51);
+
+    buildTemplate(null);
 
     renderTop();
 }
@@ -68,16 +74,16 @@ function renderTop() {
     ctx.fillStyle = "#333";
     ctx.fillRect(0, 0, gameWidth, 50);
 
-    renderScore();
+    renderStage();
 }
 
 // Render Score label and value:
-function renderScore() {
+function renderStage() {
     ctx.fillStyle = "#FFF";
     ctx.font = "14px sans-serif";
-    ctx.fillText("Score: ", 20, 30);
+    ctx.fillText("Stage: ", gameWidth - 85, 30);
 
     ctx.fillStyle = "#FFF";
     ctx.font = "14px sans-serif";
-    ctx.fillText(score, 65, 31);
+    ctx.fillText(stage, gameWidth - 40, 31);
 }

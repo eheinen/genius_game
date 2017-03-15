@@ -21,8 +21,15 @@ window.onload = function() {
     }
 
     document.addEventListener('keydown', function(event) {
-        console.log(event.key)
         checkInputSequence('key', event);
+        key = event.key
+        if (key == "Enter") {
+            reset();
+            initialize();
+            builSequences();
+            manageVelocity();
+            showSequence();
+        }
     }, false);
 };
 
@@ -65,7 +72,6 @@ function builSequences() {
     for (var i = stageSequence; i < stage; i++) {
         sequence[i] = randomIntFromInterval(1, 4);
     }
-    console.log(sequence)
 }
 
 function checkInputSequence(mode, event) {

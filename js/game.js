@@ -53,6 +53,11 @@ function buildTemplate(index) {
             ctx.drawImage(gameTemplate, (gameWidth / 2) - 200, (gameHeight / 2) - 170);
         }, 10);
     };
+    var mode = ""
+    if(startToPlay){
+        mode = "player"
+    }
+    buildMessage(mode)
 }
 
 function builSequences() {
@@ -67,13 +72,29 @@ function checkInputSequence(mode, event) {
     if (startToPlay && !gameOver) {
         arrowInput = getArrowInput(mode, event);
         if (arrowInput != null) {
+          gameTemplate = new Image();
+          setTimeout(function(){
+            gameTemplate.src = "imgs/genius_template_" + arrowInput + ".png";
+            gameTemplate.onload = function() {
+                ctx.drawImage(gameTemplate, (gameWidth / 2) - 200, (gameHeight / 2) - 170);
+                setTimeout(function(){
+                  buildTemplate(null)
+                }, 50)
+            };
+          }, 15)
+
             if (sequence[indexHit] == arrowInput) {
                 if ((indexHit + 1) == stage) {
-                    nextStage();
+                    startToPlay = false
+                    setTimeout(function(){
+                        nextStage();
+                    }, 1000)
+
                 } else {
                     indexHit++;
                 }
             } else {
+                startToPlay = false
                 buildGameOver();
             }
         }

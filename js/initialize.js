@@ -10,15 +10,15 @@ startToPlay = false;
 indexHit = 0;
 
 function reset() {
-  gameWidth = null;
-  gameHeight = null;
+    gameWidth = null;
+    gameHeight = null;
 
-  stage = 1;
-  velocity = 300;
-  gameOver = false;
-  sequence = new Array();
-  startToPlay = false;
-  indexHit = 0;
+    stage = 1;
+    velocity = 300;
+    gameOver = false;
+    sequence = new Array();
+    startToPlay = false;
+    indexHit = 0;
 }
 
 function initialize() {
@@ -29,25 +29,27 @@ function initialize() {
 // Build game over:
 function buildGameOver() {
     if (gameOver == false) {
-        ctx.fillStyle = "#333";
-        ctx.globalAlpha = 0.75;
-        ctx.fillRect(0, 51, 1000, 1000);
+        setTimeout(function() {
+            ctx.fillStyle = "#333";
+            ctx.globalAlpha = 0.75;
+            ctx.fillRect(0, 51, 1000, 1000);
 
-        ctx.fillStyle = "#FFF";
-        ctx.font = "30px sans-serif";
-        ctx.fillText("STAGE: " + stage, (canvas.width / 2) - 350, (canvas.height / 2) - 125);
+            ctx.fillStyle = "#FFF";
+            ctx.font = "30px sans-serif";
+            ctx.fillText("STAGE: " + stage, (canvas.width / 2) - 350, (canvas.height / 2) - 125);
 
-        ctx.fillStyle = "#FFF";
-        ctx.font = "30px sans-serif";
-        ctx.fillText("GAME OVER", (canvas.width / 2) - 100, (canvas.height / 2));
+            ctx.fillStyle = "#FFF";
+            ctx.font = "30px sans-serif";
+            ctx.fillText("GAME OVER", (canvas.width / 2) - 100, (canvas.height / 2));
 
-        ctx.fillStyle = "#FFF";
-        ctx.font = "18px sans-serif";
-        ctx.fillText("Try Again", (canvas.width / 2) - 50, (canvas.height / 2) + 35);
+            ctx.fillStyle = "#FFF";
+            ctx.font = "18px sans-serif";
+            ctx.fillText("Try Again", (canvas.width / 2) - 50, (canvas.height / 2) + 35);
+
+            gameOver = true;
+        }, 300)
 
         renderTop();
-
-        gameOver = true;
     }
 }
 
